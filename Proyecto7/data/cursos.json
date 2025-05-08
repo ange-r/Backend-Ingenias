@@ -1,0 +1,9 @@
+[
+    { "id": 1, "nombre": "Customer Experience", "categoria": "Producto" },
+    { "id": 2, "nombre": "Data Analist", "categoria": "Datos" },
+    { "id": 3, "nombre": "Desarrollo Frontend", "categoria": "Programacion" },
+    { "id": 4, "nombre": "SQL", "categoria": "Datos" },
+    { "id": 5, "nombre": "UX/UI", "categoria": "Producto" },
+    { "id": 6, "nombre": "Desarrollo Backend", "categoria": "Programacion" }
+]
+  
