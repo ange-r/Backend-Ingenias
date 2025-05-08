@@ -14,9 +14,7 @@ más cursos resultantes.
 const express = require('express');
 const app = express();
 const cursos = require('./data/cursos.json');
-const dotenv = require('dotenv');
-    dotenv.config();
-    const PORT = process.env.PORT || 3003
+const PORT = 3003
 
 
 app.get('/', (req, res) => { 
@@ -106,6 +104,6 @@ app.use((req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${PORT}`);
+    console.log(`Servidor corriendo en el puerto 3003`);
   });
   
