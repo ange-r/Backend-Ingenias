@@ -94,10 +94,10 @@ app.get('/frutas/importe/:importe', async(req, res) => {
             return;
         }
     const client = await connectToMongoDB();
-        /*if (!client) {
+        if (!client) {
             res.status(500).json({error: 'Error al conectar con la base de datos'});
         return;
-        };*/
+        };
     const db =client.db('BKN');
     const resultado = await db.collection('FrutasDB').find({importe : {$gte : importe}}).toArray();
 
@@ -117,8 +117,23 @@ app.post('/frutas', async (req, res) => {
             return;
         }
     const client = await connectToMongoDB();
-        
-})
+        if (!client){
+            res.status(500).json({error: 'Error al conectar con la base de datos'});
+            return;
+        }
+    const frutas =client.db('BKN').collection('Frutas');
+        frutas.insertOne(nuevaFruta)
+        .then(() => {
+            console.log('Nueva Fruta creada');
+            res.status(201).send(nuevaFruta);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        .finally(() => {
+            disconnectFromMongoDB();
+        });
+});
 
 app.use((req, res) => {    // Responder con formato json, como indica el middleware
     res.status(404).json({ error: 'Ha habido un error - Ruta no encontrada' });
