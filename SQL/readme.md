@@ -39,7 +39,7 @@ El objetivo de estos ejercicios es trabajar la creación de bases de datos, tabl
 
 ### Nota:
 
-- No se incluye dump completo de datos para Northwind, solo el **script de estructura**.  
+- No se incluye datos para Northwind, solo el **script de estructura**.  
 - Si necesitás poblar la base Northwind con datos reales, podés descargarlos desde el repositorio oficial de Microsoft o versiones públicas disponibles en la web.  
 - Los ejercicios están organizados por **temática** y **dificultad creciente**.
 
