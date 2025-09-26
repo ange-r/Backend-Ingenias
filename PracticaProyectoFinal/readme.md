@@ -80,4 +80,3 @@ npm run dev
 - [x] Clonación repo e instalación de dependencias
 - [x] Conexión a DB
 - [x] CRUD de productos
-

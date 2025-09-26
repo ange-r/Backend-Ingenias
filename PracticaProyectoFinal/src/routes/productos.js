@@ -1,18 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
-const dotenv = require('dotenv');
-    dotenv.config();
-const bodyParser = require('body-parser');
-    // Esto me tira gpt - Preguntar ¿esta es una buena práctica suplantando a body-parser?:
-    // app.use(express.json()); // Para leer JSON
 const { conectar, desconectar } = require('../sequelize');   //Invoco a las funciones del manager
 const products = require('../models/Products')    // Invoco el modelo del objeto Producto
 
 // Método POST - Crear Productos
 router.post('/productos', async (req, res) => {
   try {
-    const {ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOrder, ReorderLevel, Discontinued} = req.body;
+    const { ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOrder, ReorderLevel, Discontinued} = req.body;
     const nuevoProducto = await products.create({ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOrder, ReorderLevel, Discontinued});
     res.status(201).json(nuevoProducto);
   } catch(error) {
@@ -27,7 +21,7 @@ router.put('/productos/:id', async (req, res) => {
     const productoID = req.params.id;
     const resultado = await products.findByPk(productoID);
         if(!resultado) {
-            res.status(404).json({error: 'No se a encontrado el producto solicitado.'})
+            res.status(404).json({error: 'No se ha encontrado el producto solicitado.'})
         } else {
             const {ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOrder, ReorderLevel, Discontinued} = req.body;
             await resultado.update({ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOrder, ReorderLevel, Discontinued});
@@ -56,7 +50,7 @@ router.get('/productos/:id', async (req, res) => {
         const productoID = req.params.id;
         const resultado = await products.findByPk(productoID);
         if (!resultado) {
-            res.status(404).json({error: 'No se a encontrado el producto solicitado.'})
+            res.status(404).json({error: 'No se ha encontrado el producto solicitado.'})
         } else {
         res.status(201).json(resultado);
         }
@@ -71,7 +65,7 @@ router.delete('/productos/:id', async (req, res) => {
     try {
         const productoID = req.params.id;
         const resultado = await products.findByPk(productoID);
-        !resultado  ? res.status(404).json({error: 'No se a encontrado el producto solicitado.'})
+        !resultado  ? res.status(404).json({error: 'No se ha encontrado el producto solicitado.'})
               : await resultado.destroy();
         res.json({mensaje: 'Producto eliminado correctamente.'});
     } catch(error) {
