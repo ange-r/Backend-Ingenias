@@ -3,17 +3,19 @@ const dotenv = require('dotenv');
     dotenv.config();
 const { Sequelize } = require('sequelize'); // La constante siempre entre llaves
 
-// Sequelizese refiere a la propia biblioteca,
-// mientras sequelizese refiere a un caso de Sequelize, 
+// 'Sequelize' se refiere a la propia biblioteca
+// Mientras 'sequelize' se refiere a un caso de Sequelize, 
 // que representa una conexión a una base de datos. 
 // Esta es la convención recomendada.
 
 // Instancio Sequelize - Esta conexión al final debo exportarla para poder trabajar 
-const seqDB = new Sequelize('Northwind', 'root', ' myFirstDB_2025!', { 
-    host: "localhost",
-    dialect: "mysql",
-    dialectOptions: {options: {encrypt : true}},
-    define: {timestamps: false} // Para grabar tiempo en que conecta y desconecta
+const seqDB = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASS, { 
+        host: process.env.DB_HOST || 'localhost',
+        port: process.env.DB_PORT || 3306,
+        dialect: 'mysql',
 });
 
 // Método CONEXIÓN
